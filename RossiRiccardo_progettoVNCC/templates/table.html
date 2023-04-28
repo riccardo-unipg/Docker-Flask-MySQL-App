@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database</title>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="../static/js/jquery.min.js" type="text/javascript"></script>
+
+    <style>
+       table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ffb159ac;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Database</h1>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>user_id</th>
+                <th>user_name</th>
+                <th>user_username</th>
+                <th>user_password</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            // Esecuzione della richiesta AJAX alla funzione Flask
+            $.ajax({
+                url: '/tbl_user',
+                dataType: "json",
+                type: 'GET',
+                success: function(data) {
+                    // Elaborazione dei dati restituiti dalla funzione Flask
+                    console.log(data);
+                    var rows = '';
+                    $.each(data, function(index, row) {
+                        rows += '<tr>';
+                        rows += '<td>' + row.user_id + '</td>';
+                        rows += '<td>' + row.user_name + '</td>';
+                        rows += '<td>' + row.user_username + '</td>';
+                        rows += '<td>' + row.user_password + '</td>';
+                        rows += '</tr>';
+                    });
+                    $('#table tbody').html(rows);  // Aggiunta delle righe alla tabella HTML
+                },
+
+                error: function(error) {
+                        console.log(error);
+                    }
+            });
+        });
+    </script>
+</body>
+</html>

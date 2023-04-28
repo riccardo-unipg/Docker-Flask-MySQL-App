@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Python Flask Bucket List App</title>
+   
+    <script src="../static/js/jquery.min.js" type="text/javascript"></script>
+
+    <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+
+    <style>
+      h1 {
+        text-align: center;
+      }
+    </style>
+   
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Registrati Ora!</h1>
+        <form class="form-signin">
+        <label for="inputName" class="sr-only">Name</label>
+        <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+        
+        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Iscriviti</button>
+        <button id="btnShowDatabase" class="btn btn-lg btn-primary btn-block" type="button">Mostra Database</button>
+      </form>
+      </div>
+      <footer class="footer">
+        <p>&copy; Book Haven S.R.L 2015</p>
+      </footer>
+    </div>
+
+    <script>
+        $(function() {
+            $('#btnSignUp').click(function() {
+                $.ajax({
+                    url: '/signUp',
+                    data: $('form').serialize(),
+                    type: 'POST',
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+<script>
+  $(document).ready(function() {
+      $('#btnShowDatabase').click(function() {
+          window.location.href = '/showSignUp/showDatabase';  // Reindirizzamento alla pagina showDatabase
+      });
+  });
+</script>
+
+  </body>
+</html>
